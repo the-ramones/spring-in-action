@@ -20,12 +20,30 @@
         <constructor-arg ref="shakespeare-poem"/>        
     </bean>
     
-        
-    <!--bean id="propertyConfigurer"
+    <bean id="stage" class="competition.Stage" factory-method="getInstance" />
+    
+    <bean id="auditorium" class="competition.Auditorium" 
+          init-method="turnOnTheLights" 
+          destroy-method="turnOffTheLights" />
+    
+   <bean id="saxo" class="competition.Saxophone" />
+
+   <bean id="kenny" class="competition.Instrumentalist">
+        <property name="song" value="Jingle Bells" /> 
+        <property name="instrument" ref="saxo" />
+    </bean>    
+    
+   <!-- wiring through p-namespace prefix -->
+   <bean id="kenny2" class="competition.Instrumentalist"
+        p:song="Trello Trell"
+        p:instrument-ref="saxo" /> 
+   
+   <!--
+   bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="/WEB-INF/jdbc.properties" />
-
-<bean id="dataSource"
+         
+   <bean id="dataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource"
     p:driverClassName="${jdbc.driverClassName}"
     p:url="${jdbc.url}"
