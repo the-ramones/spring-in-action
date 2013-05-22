@@ -11,6 +11,6 @@ public class Saxophone implements Instrument {
 
     @Override
     public void play() {
-        System.out.println("PLAYING SAXO SONG");
+        System.out.println("PLAYING SAXO SONG" + this);
     }
 }

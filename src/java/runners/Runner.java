@@ -18,7 +18,7 @@ public class Runner {
         ApplicationContext ctx = new FileSystemXmlApplicationContext("/web/WEB-INF/applicationContext.xml");
 
         //TODO: figure it out, quitter
-        // You firmly must pul your application-ciontexts XML files into /WEB_INF/classes directory 
+        // You firmly must pull your application-context XML files into /WEB_INF/classes/ directory 
         // for appropriate locations inside war-file that is load to the web-server (Apache, JBoss)
         // classpath:applicationContext.xml - has been tested, work
         // classpath*:applicationContext.xml - has been tested, work

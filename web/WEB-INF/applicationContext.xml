@@ -30,7 +30,10 @@
 
    <bean id="kenny" class="competition.Instrumentalist">
         <property name="song" value="Jingle Bells" /> 
-        <property name="instrument" ref="saxo" />
+        <property name="instrument">
+            <!--inner bean-->
+            <bean class="competition.Saxophone" />
+        </property>
     </bean>    
     
    <!-- wiring through p-namespace prefix -->
