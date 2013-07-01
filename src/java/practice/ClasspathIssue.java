@@ -1,4 +1,4 @@
-package runners;
+package practice;
 
 import java.util.HashSet;
 
