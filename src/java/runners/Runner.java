@@ -5,6 +5,8 @@ import competition.Instrument;
 import competition.Instrumentalist;
 import competition.PerformanceException;
 import competition.Performer;
+import competition.Ticket;
+import java.math.BigDecimal;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -29,6 +31,12 @@ public class Runner {
         Auditorium auditorium = (Auditorium) ctx.getBean("auditorium");
         Instrumentalist kenny = (Instrumentalist) ctx.getBean("kenny");
         Instrumentalist kenny2 = (Instrumentalist) ctx.getBean("kenny2");
+        Ticket t1 = (Ticket) ctx.getBean("ticket");
+        Ticket t2 = (Ticket) ctx.getBean("ticket");
+        Instrumentalist jenny = (Instrumentalist) ctx.getBean("Jenny");
+        Performer  hank = (Performer) ctx.getBean("Hank");
+        Performer hank2 = (Performer) ctx.getBean("map-hank");
+        Performer hank3 = (Performer) ctx.getBean("prop-hank");
 
         try {
             juggler.perform();
@@ -38,7 +46,20 @@ public class Runner {
             kenny.perform();
             kenny2.perform();
             auditorium.turnOffTheLights();
+            t1.setPerformance("Shakira");
+            t2.setPerformance("Pitbull");
+            t1.setPrice(BigDecimal.valueOf(10.99));
+            t2.setPrice(BigDecimal.valueOf(12.99));
+            t1.print(); t2.print();
+            jenny.perform();
+            System.out.println("Hank:");
+            hank.perform();
+            System.out.println("Map Hank:");
+            hank2.perform();
+            System.out.println("Properties Hank:");
+            hank3.perform();
 
+            
         } catch (PerformanceException e) {
             System.err.println("Something bad has happend: " + e.getMessage());
         }

@@ -9,11 +9,15 @@ public class Instrumentalist implements Performer {
     
     public Instrumentalist() {
     }
+    
+    public Instrumentalist(Instrument instrument) {
+        this.instrument = instrument;
+    }
 
     @Override
     public void perform()
             throws PerformanceException {
-        System.out.print("Playing" + song + " : ");
+        System.out.print("Playing " + song + " : ");
         instrument.play();
     }
     private String song;

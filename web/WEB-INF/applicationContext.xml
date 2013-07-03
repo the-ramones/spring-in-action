@@ -6,7 +6,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd" xmlns:util="http://www.springframework.org/schema/util">
 
     <bean id="juggler" class="competition.Juggler" />
     
@@ -36,10 +36,95 @@
         </property>
     </bean>    
     
+    <bean id="Jenny" class="competition.Instrumentalist">
+        <property name="song" value="Get the fuck of here" />
+        <constructor-arg name="instrument">
+            <!-- inner bean, these bean are not shared among others -->
+            <bean class="competition.Saxophone" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="Tenny" class="competition.Instrumentalist">
+        <property name="song">
+            <!-- This snippet override default @Autowired property for a bean -->
+            <null />
+        </property>
+        <property name="instrument">
+            <bean class="competition.Saxophone" />
+        </property>
+    </bean>    
    <!-- wiring through p-namespace prefix -->
    <bean id="kenny2" class="competition.Instrumentalist"
         p:song="Trello Trell"
         p:instrument-ref="saxo" /> 
+   
+   <bean id="ticket" class="competition.Ticket" scope="prototype">
+   </bean>
+   
+   <bean id="Hank" class="competition.OneManBand">
+       <property name="instruments">
+            <set>
+                <ref bean="saxo" />
+                <ref bean="saxo" />
+                <ref bean="saxo" />
+                <!-- <null /> -->
+                <!-- <value='value of a list' -<value> -->
+                <!-- <value type="java.lang.String">value-property</value> -->
+            </set>
+       </property>
+   </bean>    
+   
+   <bean id="map-hank" class="competition.OneManBandMap">
+       <property name="instruments">
+           <map>
+               <entry key="saxo" value-ref="saxo" />
+               <entry key="saxo2" value-ref="saxo" />
+               <entry key="saxo3" value-ref="saxo" />
+           </map>
+       </property>
+   </bean>
+   
+   <bean id="prop-hank" class="competition.OneManBandProperties">
+       <property name="instruments">
+           <props>
+               <prop key="saxo">saxo1</prop>
+               <prop key="saxo2">saxo2</prop>
+               <prop key="saxo3">saxo3</prop>
+           </props>
+       </property>
+   </bean>    
+   
+   <util:list id="cities">
+       <bean class="spel.City" p:title="Chicago" p:zip="12345" />
+       <bean class="spel.City" p:title="LA" p:zip="54321" />
+   </util:list>
+   
+   <util:map id="city-map">
+       <entry key="chicago" value="#{cities[0]}" />
+       <entry key='LA' value="#{cities[1]}" />
+   </util:map>
+   
+   <util:properties>
+       <prop key="twitter.site">site</prop>
+       <prop key="twitter.protocol">protocol</prop>
+       <prop key="twitter.account">account</prop>
+   </util:properties>
+   
+   <util:properties id="settings" location="classpath:settings.properties>       
+   </util:properties>
+   
+   <bean id="Tenny" class="competition.Instrumentalist">
+       <property name="song" type="java.lang.String" value="#{T(java.lang.Math).getCLass()}" />
+       <property name="instrument">
+           <bean class="competition.Saxophone" />
+       </property>        
+   </bean>
+   
+   <!-- SpEL sampples
+      #{cities.?[zip gt 100].![title + ' ..']}
+      #{cities.^[zip gt 100]}
+      #{cities.$[zip gt 100]}
+   -->
    
    <!--
    bean id="propertyConfigurer"
