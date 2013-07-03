@@ -14,7 +14,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  *
  * @author paul
  */
-public class Runner {
+public class RunnerXml {
 
     public static void main(String[] args) throws PerformanceException {
         ApplicationContext ctx = new FileSystemXmlApplicationContext("/web/WEB-INF/applicationContext.xml");
@@ -37,6 +37,9 @@ public class Runner {
         Performer  hank = (Performer) ctx.getBean("Hank");
         Performer hank2 = (Performer) ctx.getBean("map-hank");
         Performer hank3 = (Performer) ctx.getBean("prop-hank");
+        
+        // Autowiring
+        Performer tenny = (Performer) ctx.getBean("tenny");
 
         try {
             juggler.perform();
@@ -58,7 +61,9 @@ public class Runner {
             hank2.perform();
             System.out.println("Properties Hank:");
             hank3.perform();
-
+            
+            // Autowiring
+            tenny.perform();
             
         } catch (PerformanceException e) {
             System.err.println("Something bad has happend: " + e.getMessage());

@@ -10,36 +10,40 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd" xmlns:context="http://www.springframework.org/schema/context">
        <!-- default-autowire="byType" -->
-       
-    <bean id="juggler" class="competition.Juggler" />
+
+    <!-- enables annotations like @Autowire @Inject @Resource -->
+    <context:annotation-config></context:annotation-config>
+
+                   
+    <bean id="juggler" class="competition.annotation.Juggler" />
     
-    <bean id="shakespeare-poem" class="competition.Poem">
+    <bean id="shakespeare-poem" class="competition.annotation.Poem">
         <constructor-arg name="author" type="java.lang.String" value="W. Shakespeare" />
         <constructor-arg name="title" type="java.lang.String" value="Romeo and Julliet" />
     </bean>
         
-    <bean id="poetic-juggler" class="competition.PoeticJuggler">
+    <bean id="poetic-juggler" class="competition.annotation.PoeticJuggler">
         <constructor-arg type="java.lang.Integer" value="15" />
         <constructor-arg ref="shakespeare-poem"/>        
     </bean>
     
-    <bean id="stage" class="competition.Stage" factory-method="getInstance" />
+    <bean id="stage" class="competition.annotation.Stage" factory-method="getInstance" />
     
-    <bean id="auditorium" class="competition.Auditorium" 
+    <bean id="auditorium" class="competition.annotation.Auditorium" 
           init-method="turnOnTheLights" 
           destroy-method="turnOffTheLights" />
     
    <bean id="saxo" class="competition.Saxophone" />
 
-   <bean id="kenny" class="competition.Instrumentalist">
+   <bean id="kenny" class="competition.annotation.Instrumentalist">
         <property name="song" value="Jingle Bells" /> 
         <property name="instrument">
             <!--inner bean-->
-            <bean class="competition.Saxophone" />
+            <bean class="competition.annotation.Saxophone" />
         </property>
     </bean>    
     
-    <bean id="Jenny" class="competition.Instrumentalist">
+    <bean id="Jenny" class="competition.annotation.Instrumentalist">
         <property name="song" value="Get the fuck of here" />
         <constructor-arg name="instrument">
             <!-- inner bean, these bean are not shared among others -->
@@ -47,24 +51,24 @@
         </constructor-arg>
     </bean>
     
-    <bean id="Tenny" class="competition.Instrumentalist">
+    <bean id="Tenny" class="competition.annotation.Instrumentalist">
         <property name="song">
             <!-- This snippet override default @Autowired property for a bean -->
             <null />
         </property>
         <property name="instrument">
-            <bean class="competition.Saxophone" />
+            <bean class="competition.annotation.Saxophone" />
         </property>
     </bean>    
    <!-- wiring through p-namespace prefix -->
-   <bean id="kenny2" class="competition.Instrumentalist"
+   <bean id="kenny2" class="competition.annotation.Instrumentalist"
         p:song="Trello Trell"
         p:instrument-ref="saxo" /> 
    
-   <bean id="ticket" class="competition.Ticket" scope="prototype">
+   <bean id="ticket" class="competition.annotation.Ticket" scope="prototype">
    </bean>
    
-   <bean id="Hank" class="competition.OneManBand">
+   <bean id="Hank" class="competition.annotation.OneManBand">
        <property name="instruments">
             <set>
                 <ref bean="saxo" />
@@ -77,7 +81,7 @@
        </property>
    </bean>    
    
-   <bean id="map-hank" class="competition.OneManBandMap">
+   <bean id="map-hank" class="competition.annotation.OneManBandMap">
        <property name="instruments">
            <map>
                <entry key="saxo" value-ref="saxo" />
@@ -87,7 +91,7 @@
        </property>
    </bean>
    
-   <bean id="prop-hank" class="competition.OneManBandProperties">
+   <bean id="prop-hank" class="competition.annotation.OneManBandProperties">
        <property name="instruments">
            <props>
                <prop key="saxo">saxo1</prop>
@@ -98,8 +102,8 @@
    </bean>    
    
    <util:list id="cities">
-       <bean class="competition.Poem" p:title="Chicago" p:author="12345" />
-       <bean class="competition.Poem" p:title="LA" p:author="54321" />
+       <bean class="competition.annotation.Poem" p:title="Chicago" p:author="12345" />
+       <bean class="competition.annotation.Poem" p:title="LA" p:author="54321" />
        <value type="java.lang.String">fuck</value>
    </util:list>
    
@@ -117,16 +121,16 @@
    <util:properties id="settings" location="classpath:settings.properties">       
    </util:properties>
    
-   <bean id="instrument" class="competition.Saxophone">       
+   <bean id="instrument" class="competition.annotation.Saxophone">       
    </bean>
    
-   <bean id="instrument2" class="competition.Saxophone" primary="false">       
+   <bean id="instrument2" class="competition.annotation.Saxophone" primary="false">       
    </bean>
    
-   <bean id="instrument3" class="competition.Saxophone" autowire-candidate="false">       
+   <bean id="instrument3" class="competition.annotation.Saxophone" autowire-candidate="false">       
    </bean>
    
-   <bean id="tenny" class="competition.Instrumentalist" autowire="byName" >
+   <bean id="tenny" class="competition.annotation.Instrumentalist" autowire="byName" >
        <property name="song" value="#{T(java.lang.Math).E}" />
    </bean>   
    
