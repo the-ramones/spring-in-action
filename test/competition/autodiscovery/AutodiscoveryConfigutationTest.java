@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import static org.junit.Assert.*;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 /**
  *
@@ -81,13 +83,33 @@ public class AutodiscoveryConfigutationTest {
 
         // @Configuration declared beans
         Instrumentalist solo = (Instrumentalist) ctx.getBean("solo");
-        Juggler kenny = (Juggler) ctx.getBean("kenny");
+        Performer kenny = (Performer) ctx.getBean("kenny");
 
         assertNotNull(solo);
         assertNotNull(kenny);
         
         solo.perform();
-        kenny.perform();
+        kenny.perform();        
+    }
+    
+    @Test
+    public void AutodiscoveryAopTest() throws PerformanceException {
+        Audience audience = (Audience) ctx.getBean("audience");
         
+        assertNotNull(audience);
+        audience.takeSeats();
+        audience.turnOffCellPhones();
+        audience.applaud();
+        audience.demandRefund();
+        
+        Performer kenny = (Performer) ctx.getBean("kenny");
+        kenny.perform();
+        Instrument saxo =  (Instrument) ctx.getBean("saxo");
+        assertNotNull(saxo);
+        
+        JukeBox juke = (JukeBox) ctx.getBean("jukeBox");
+        
+        assertNotNull(juke);
+        juke.play("Viva la viva, viva Italia", "Lala Vivala");
     }
 }

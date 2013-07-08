@@ -4,6 +4,7 @@ import competition.autodiscovery.Auditorium;
 import competition.autodiscovery.Instrument;
 import competition.autodiscovery.Instrumentalist;
 import competition.autodiscovery.Juggler;
+import competition.autodiscovery.JukeBox;
 import competition.autodiscovery.PerformanceException;
 import competition.autodiscovery.Performer;
 import competition.autodiscovery.Poem;
@@ -74,6 +75,9 @@ public class RunnerAutodiscovery {
             solo.perform();
             kenny.perform();
 
+            JukeBox juke = (JukeBox) ctx.getBean("jukeBox");
+            juke.play("Viva la viva, viva Italia", "Lala Vivala");
+            
         } catch (PerformanceException e) {
             System.err.println("Something bad has happend: " + e.getMessage());
         }

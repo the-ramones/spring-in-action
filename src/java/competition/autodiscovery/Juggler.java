@@ -1,7 +1,6 @@
 package competition.autodiscovery;
 
 import org.springframework.stereotype.Component;
-import org.springframework.test.context.transaction.AfterTransaction;
 
 /**
  *
