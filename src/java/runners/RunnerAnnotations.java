@@ -5,6 +5,7 @@ import competition.annotation.Instrument;
 import competition.annotation.Instrumentalist;
 import competition.annotation.PerformanceException;
 import competition.annotation.Performer;
+import competition.annotation.Poem;
 import competition.annotation.Ticket;
 import java.math.BigDecimal;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,7 @@ public class RunnerAnnotations {
         // ApplicationContext ctx2 = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
         Performer juggler = (Performer) ctx.getBean("juggler");
+        Poem shakespeare = (Poem) ctx.getBean("shakespeare-poem");
         Performer poeticJuggler = (Performer) ctx.getBean("poetic-juggler");
         Instrument saxo = (Instrument) ctx.getBean("saxo");
         Auditorium auditorium = (Auditorium) ctx.getBean("auditorium");
@@ -43,6 +45,7 @@ public class RunnerAnnotations {
 
         try {
             juggler.perform();
+            shakespeare.recite();
             poeticJuggler.perform();
             saxo.play();
             auditorium.turnOnTheLights();

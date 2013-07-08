@@ -1,4 +1,4 @@
-package competition.annotation;
+package competition.autodiscovery;
 
 import java.text.MessageFormat;
 import org.springframework.beans.factory.annotation.Autowired;

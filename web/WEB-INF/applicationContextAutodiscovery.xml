@@ -14,59 +14,57 @@
        <!-- default-autowire="byType" -->
 
     <!-- enables annotations like @Autowire @Inject @Resource -->
-    <context:annotation-config />
+    <context:component-scan base-package="competition.autodiscovery" />
                    
-    <bean id="juggler" class="competition.annotation.Juggler" />
+    <bean id="juggler" class="competition.autodiscovery.Juggler" />
     
-    <!-- contents of the poems -->
-    <util:properties id="literature" location="classpath:literature.properties" />
-    
-    <bean id="shakespeare-poem" class="competition.annotation.Poem" />
+    <bean id="shakespeare-poem" class="competition.autodiscovery.Poem" />
         
-    <bean id="poetic-juggler" class="competition.annotation.PoeticJuggler" />    
+    <bean id="poetic-juggler" class="competition.autodiscovery.PoeticJuggler" />    
     
-    <bean id="stage" class="competition.annotation.Stage" factory-method="getInstance" />
+    <bean id="stage" class="competition.autodiscovery.Stage" factory-method="getInstance" />
     
-    <bean id="auditorium" class="competition.annotation.Auditorium" 
+    <bean id="auditorium" class="competition.autodiscovery.Auditorium" 
           init-method="turnOnTheLights" 
           destroy-method="turnOffTheLights" />
     
-   <bean id="saxo" class="competition.annotation.Saxophone" />
+    <bean id="saxo" class="competition.autodiscovery.Saxophone" />
 
-   <bean id="kenny" class="competition.annotation.Instrumentalist">
+    <bean id="kenny" class="competition.autodiscovery.Instrumentalist">
         <property name="song" value="Jingle Bells" /> 
         <property name="instrument">
             <!--inner bean-->
-            <bean class="competition.annotation.Saxophone" />
+            <bean class="competition.autodiscovery.Saxophone" />
         </property>
     </bean>    
     
-    <bean id="Jenny" class="competition.annotation.Instrumentalist">
+    <bean id="Jenny" class="competition.autodiscovery.Instrumentalist">
         <property name="song" value="Get the fuck of here" />
         <constructor-arg name="instrument">
             <!-- inner bean, these bean are not shared among others -->
-            <bean class="competition.annotation.Saxophone" />
+            <bean class="competition.autodiscovery.Saxophone" />
         </constructor-arg>
     </bean>
     
-    <bean id="Tenny" class="competition.annotation.Instrumentalist">
+    <bean id="Tenny" class="competition.autodiscovery.Instrumentalist">
         <property name="song">
             <!-- This snippet override default @Autowired property for a bean -->
             <null />
         </property>
         <property name="instrument">
-            <bean class="competition.annotation.Saxophone" />
+            <bean class="competition.autodiscovery.Saxophone" />
         </property>
     </bean>    
     
    <!-- wiring through p-namespace prefix -->
-   <bean id="kenny2" class="competition.annotation.Instrumentalist"
+   
+   <bean id="kenny2" class="competition.autodiscovery.Instrumentalist"
         p:song="Trello Trell"
         p:instrument-ref="saxo" /> 
    
-   <bean id="ticket" class="competition.annotation.Ticket" scope="prototype" />
+   <bean id="ticket" class="competition.autodiscovery.Ticket" scope="prototype" />
    
-   <bean id="Hank" class="competition.annotation.OneManBand">
+   <bean id="Hank" class="competition.autodiscovery.OneManBand">
        <property name="instruments">
             <set><!-- or <list> -->
                 <ref bean="saxo" />
@@ -79,7 +77,7 @@
        </property>
    </bean>    
    
-   <bean id="map-hank" class="competition.annotation.OneManBandMap">
+   <bean id="map-hank" class="competition.autodiscovery.OneManBandMap">
        <property name="instruments">
            <map>
                <entry key="saxo" value-ref="saxo" />
@@ -89,7 +87,7 @@
        </property>
    </bean>
    
-   <bean id="prop-hank" class="competition.annotation.OneManBandProperties">
+   <bean id="prop-hank" class="competition.autodiscovery.OneManBandProperties">
        <property name="instruments">
            <props>
                <prop key="saxo">saxo1</prop>
@@ -97,11 +95,14 @@
                <prop key="saxo3">saxo3</prop>
            </props>
        </property>
-   </bean>    
+   </bean>       
+       
+   <!-- contents of the poems -->
+   <util:properties id="literature" location="classpath:literature.properties" />
    
    <util:list id="cities">
-       <bean class="competition.annotation.Poem" p:title="Chicago" p:author="12345" />
-       <bean class="competition.annotation.Poem" p:title="LA" p:author="54321" />
+       <bean class="competition.autodiscovery.Poem" p:title="Chicago" p:author="12345" />
+       <bean class="competition.autodiscovery.Poem" p:title="LA" p:author="54321" />
    </util:list>
    
    <util:map id="city-map">
@@ -118,17 +119,17 @@
    <util:properties id="settings" location="classpath:settings.properties">       
    </util:properties>
    
-   <bean id="instrument" class="competition.annotation.Saxophone">       
+   <bean id="instrument" class="competition.autodiscovery.Saxophone">       
    </bean>
    
-   <bean id="instrument2" class="competition.annotation.Saxophone" primary="false">       
+   <bean id="instrument-second" class="competition.autodiscovery.Saxophone" primary="false">       
        <qualifier value="stringed" />
    </bean>
    
-   <bean id="instrument3" class="competition.annotation.Saxophone" autowire-candidate="false">       
+   <bean id="instrument-third" class="competition.autodiscovery.Saxophone" autowire-candidate="false">       
    </bean>
    
-   <bean id="tenny" class="competition.annotation.Instrumentalist" autowire="byName" >       
+   <bean id="tenny" class="competition.autodiscovery.Instrumentalist" autowire="byName" >       
    </bean>   
    
    <!-- SpEL sampples
@@ -149,6 +150,6 @@
     p:username="${jdbc.username}"
     p:password="${jdbc.password}" /-->
 
-    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+   <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
 </beans>

@@ -18,12 +18,15 @@
                    
     <bean id="juggler" class="competition.annotation.Juggler" />
     
-    <!-- contents of the poems -->
-    <util:properties id="literature" location="classpath:literature.properties" />
-    
-    <bean id="shakespeare-poem" class="competition.annotation.Poem" />
+    <bean id="shakespeare-poem" class="competition.annotation.Poem">
+        <constructor-arg name="author" type="java.lang.String" value="W. Shakespeare" />
+        <constructor-arg name="title" type="java.lang.String" value="Romeo and Julliet" />
+    </bean>
         
-    <bean id="poetic-juggler" class="competition.annotation.PoeticJuggler" />    
+    <bean id="poetic-juggler" class="competition.annotation.PoeticJuggler">
+        <constructor-arg type="java.lang.Integer" value="15" />
+        <constructor-arg ref="shakespeare-poem"/>        
+    </bean>
     
     <bean id="stage" class="competition.annotation.Stage" factory-method="getInstance" />
     
@@ -58,22 +61,22 @@
             <bean class="competition.annotation.Saxophone" />
         </property>
     </bean>    
-    
    <!-- wiring through p-namespace prefix -->
    <bean id="kenny2" class="competition.annotation.Instrumentalist"
         p:song="Trello Trell"
         p:instrument-ref="saxo" /> 
    
-   <bean id="ticket" class="competition.annotation.Ticket" scope="prototype" />
+   <bean id="ticket" class="competition.annotation.Ticket" scope="prototype">
+   </bean>
    
    <bean id="Hank" class="competition.annotation.OneManBand">
        <property name="instruments">
-            <set><!-- or <list> -->
+            <set>
                 <ref bean="saxo" />
                 <ref bean="saxo" />
                 <ref bean="saxo" />
                 <!-- <null /> -->
-                <!-- <value>'value of a list'<value> -->
+                <!-- <value='value of a list' -<value> -->
                 <!-- <value type="java.lang.String">value-property</value> -->
             </set>
        </property>
@@ -102,6 +105,7 @@
    <util:list id="cities">
        <bean class="competition.annotation.Poem" p:title="Chicago" p:author="12345" />
        <bean class="competition.annotation.Poem" p:title="LA" p:author="54321" />
+       <value type="java.lang.String">fuck</value>
    </util:list>
    
    <util:map id="city-map">
@@ -128,7 +132,8 @@
    <bean id="instrument3" class="competition.annotation.Saxophone" autowire-candidate="false">       
    </bean>
    
-   <bean id="tenny" class="competition.annotation.Instrumentalist" autowire="byName" >       
+   <bean id="tenny" class="competition.annotation.Instrumentalist" autowire="byName" >
+       <property name="song" value="#{T(java.lang.Math).E}" />
    </bean>   
    
    <!-- SpEL sampples
