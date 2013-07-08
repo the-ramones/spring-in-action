@@ -1,12 +1,13 @@
 package competition.autodiscovery;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author the-ramones
  */
-@Qualifier("stringed")
+@Component("saxo")
 public class Saxophone implements Instrument {
 
     public Saxophone() {

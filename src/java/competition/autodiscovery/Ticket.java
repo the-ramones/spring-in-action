@@ -1,11 +1,15 @@
 package competition.autodiscovery;
 
 import java.math.BigDecimal;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author paul
  */
+@Component
+@Scope("prototype")
 public class Ticket {
 
     public Ticket() {

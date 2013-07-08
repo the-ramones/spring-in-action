@@ -3,11 +3,13 @@ package competition.autodiscovery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author the-ramones
  */
+@Component
 public class Instrumentalist implements Performer {
 
     public Instrumentalist() {
@@ -17,7 +19,7 @@ public class Instrumentalist implements Performer {
      *
      * @param instrument
      */
-    @Autowired(required=false)
+//    @Autowired(required=false)
     public Instrumentalist(Instrument instrument) {
         this.instrument = instrument;
     }
@@ -29,7 +31,7 @@ public class Instrumentalist implements Performer {
         instrument.play();
     }
     
-    @Value("#{settings['twitter.site']}")
+    @Value("La-la-la")
     private String song;
 
 

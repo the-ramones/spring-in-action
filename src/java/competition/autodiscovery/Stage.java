@@ -1,9 +1,12 @@
 package competition.autodiscovery;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author the-ramones
  */
+@Component
 public class Stage {
 
     public void printMessage() {

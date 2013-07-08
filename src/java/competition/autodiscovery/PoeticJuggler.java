@@ -4,16 +4,18 @@ import java.text.MessageFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author paul
  */
+@Component("poetic-juggler")
 public class PoeticJuggler extends Juggler {
 
     private Poem poem;
 
-    @Autowired
+    @Autowired    
     public PoeticJuggler(@Value("15") Integer beanBags, Poem poem) {
         super(beanBags);
         this.poem = poem;

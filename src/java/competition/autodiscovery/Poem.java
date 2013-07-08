@@ -1,21 +1,25 @@
 package competition.autodiscovery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author paul
  */
+@Component("shakespeare-poem")
+@Qualifier("plain")
 public class Poem {
 
     public Poem() {
     }
-    @Value("#{literature['shakespeare.poem']}")
+    @Value("La Figaro")
     private String title;
-    @Value("#{literature['shakespeare.author']}")
+    @Value("W. Shakespeare")
     private String author;
-    @Value("#{literature['shakespeare.content']}")
+    @Value("La-la-la")
     private String[] content = null;
 
     public Poem(String author, String title) {

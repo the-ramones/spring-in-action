@@ -1,9 +1,13 @@
 package competition.autodiscovery;
 
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.transaction.AfterTransaction;
+
 /**
  *
  * @author paul
  */
+@Component
 public class Juggler implements Performer {
 
     private Integer beanBags = 3;

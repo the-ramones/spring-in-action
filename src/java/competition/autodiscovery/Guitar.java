@@ -1,13 +1,16 @@
 package competition.autodiscovery;
 
-import competition.annotation.Instrument;
-import competition.annotation.custom.StringedInstrument;
+import competition.annotation.StringedInstrument;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author paul
  */
-@StringedInstrument
+@Component
+//@StringedInstrument
+@Qualifier("stringed")
 public class Guitar implements Instrument {
 
     @Override

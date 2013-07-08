@@ -1,6 +1,5 @@
 package competition.annotation;
 
-import competition.annotation.custom.StringedInstrument;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
