@@ -21,9 +21,21 @@
             <aop:around method="watching" pointcut-ref="play" />
         </aop:aspect>
         
-    <aop:aspect ref="prompt">
-            <aop:pointcut id="play2" expression="execution(* competition.autodiscovery.JukeBox.play(..)) and args(song)" />
-            <aop:before method="print" arg-names="song,title" pointcut-ref="play2" />
+        <aop:aspect ref="prompt">
+            <aop:pointcut id="play2" expression="execution(* competition.autodiscovery.JukeBox.play(java.lang.String,..)) and args(title,..)" />
+            <aop:after method="print" arg-names="title" pointcut-ref="play2" />
+        </aop:aspect>   
+        
+        <aop:aspect ref="juggler">
+            <aop:declare-parents types-matching="competition.autodiscovery.Performer"
+                                 implement-interface="competition.autodiscovery.SelfManaged"
+                                 default-impl="competition.autodiscovery.Manager" /> 
+        </aop:aspect>
+        
+        <aop:aspect ref="poetic-juggler">
+            <aop:declare-parents types-matching="competition.autodiscovery.Performer" 
+                                 implement-interface="competition.autodiscovery.Finansable"
+                                 delegate-ref="financier" />
         </aop:aspect>
     </aop:config>
 </beans>

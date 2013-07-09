@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Prompt {
 
-    public void print(String song, String title) {
-        System.out.println(song + " : " + title);
+    public void print(String title) {
+        System.out.println(title);
     }
 }

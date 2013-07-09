@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class Audience {
 
+    public Audience() {
+    }
+
     public void takeSeats() {
         System.out.println("The audience is taking their seats");
     }
@@ -29,11 +32,9 @@ public class Audience {
     // Use ProceedingJoinpoint as a  parameter to achieve context
     public void watching(ProceedingJoinPoint join) throws Throwable {
         System.out.println("Audience is watching as the instrument is playing");
-        
+
         join.proceed();
-        
+
         System.out.println("Audience has finished watching");
     }
-    
-  
 }

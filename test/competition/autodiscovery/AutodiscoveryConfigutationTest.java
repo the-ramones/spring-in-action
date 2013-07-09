@@ -103,6 +103,7 @@ public class AutodiscoveryConfigutationTest {
         audience.demandRefund();
         
         Performer kenny = (Performer) ctx.getBean("kenny");
+        assertNotNull(kenny);
         kenny.perform();
         Instrument saxo =  (Instrument) ctx.getBean("saxo");
         assertNotNull(saxo);
@@ -111,5 +112,17 @@ public class AutodiscoveryConfigutationTest {
         
         assertNotNull(juke);
         juke.play("Viva la viva, viva Italia", "Lala Vivala");
+    }
+    
+    @Test
+    public void DelegateAdvisableBeanAopTest() {
+        SelfManaged juggler =(SelfManaged) ctx.getBean("juggler");
+        Finansable poeticJuggler = (Finansable) ctx.getBean("poetic-juggler");
+        
+        assertNotNull(juggler);
+        assertNotNull(poeticJuggler);
+        
+        juggler.organize();
+        poeticJuggler.doAccounting();        
     }
 }

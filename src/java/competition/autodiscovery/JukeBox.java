@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JukeBox {
 
-    public void play(String song, String title) {
+    public void play(String title, String song) {
         System.out.println("JukeBox is starting to play " + song + " : " + title);
     }
 }
