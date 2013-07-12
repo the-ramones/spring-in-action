@@ -26,13 +26,13 @@
             <aop:after method="print" arg-names="title" pointcut-ref="play2" />
         </aop:aspect>   
         
-        <aop:aspect ref="juggler">
+        <aop:aspect id="new-juggler" ref="manager">
             <aop:declare-parents types-matching="competition.autodiscovery.Performer"
                                  implement-interface="competition.autodiscovery.SelfManaged"
                                  default-impl="competition.autodiscovery.Manager" /> 
         </aop:aspect>
         
-        <aop:aspect ref="poetic-juggler">
+        <aop:aspect id="new-poetic-juggler" ref="finansier">
             <aop:declare-parents types-matching="competition.autodiscovery.Performer" 
                                  implement-interface="competition.autodiscovery.Finansable"
                                  delegate-ref="financier" />

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
  *
  * @author the-ramones
  */
+@Component
 public class Manager implements SelfManaged {
 
     @Override
